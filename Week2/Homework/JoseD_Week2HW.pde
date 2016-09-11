@@ -2,8 +2,14 @@
 int moveballX;
 float x, y, recX, recY;
 float rotAngle = 45;
-float w,h;
+float rotBack = 20;
+float spinTime = -90;
+float w, h;
 int scene;
+float clockX,clockY,clockSizeX,clockSizeY;
+
+
+
 
 
 void setup() {
@@ -12,44 +18,38 @@ void setup() {
   scene = 0;
   w = 50;
   h = 50;
+  clockX = -20;
+  clockY = -20;
+  clockSizeX = 400;
+  clockSizeY = 400;
+ 
 }
 
 void draw() {
-  
-  switch(scene){
-    case 0:
-  background(#52C2F5);
-  textSize(15);
-  text("Press Space To Change Scene", 50,50);
 
-  Building();
-  MovingCar();
-  Windows();
-  break;
-  
+  switch(scene) {
+  case 0:
+    background(#52C2F5);
+    textSize(15);
+    text("Press Space To Change Scene", 50, 50);
+
+    Building();
+    MovingCar();
+    Windows();
+    break;
+
   case 1:
-  
-  background(255);
-  fill(0);
-  textSize(15);
-  text("Press Space To Change Scene", 50,50);
-  mouseMoved();
-  recX=mouseX;
-  recY=mouseY;
-  fill(random(200), random(200), random(200), random(200));
-  triangle(recX,recY,random(200), random(200),random(200),random(200));
-  rect(recX,recY, random(200),random(200));
-  break;
-  
-  case 2:
-  background(255);
-  Spin();
-  break;
-  
-  
-  
 
-}
+    background(255);
+    InTime();
+    break;
+
+  case 2:
+    background(255);
+    OutTime();
+
+    break;
+  }
 }
 
 
@@ -120,47 +120,115 @@ void Windows() {
   rect(550, 250, 20, 30);
 }
 
-void Spin(){
-  
-  
+void InTime() {
+
+
+
   //first Push
   pushMatrix();
   translate(width/2, height/2);
   rotate(radians(rotAngle));
   rectMode(CENTER);
+  text("Press space for next scene", 70,40);
   fill(0);
   rect(0, 0, w, h);
+  rect(50, 50, 10, 10);
+   rect(150, 150, 10, 10);
+   rect(-50, -50, 10, 10);
+   rect(-150, -150, 10, 10);
   rotAngle++;
-  ellipseMode(CORNER);
-  ellipse(50,0,w/2,h/2);
   
-  //2nd push
+ //2nd push
   pushMatrix();
-  translate(100,0);
+  translate(100, 0);
   rotate(radians(rotAngle));
-  triangle(30,0,0,0,w/2,h/2);
-  
-  
+  triangle(30, 0, 0, 0, w/2, h/2);
   //3rd push
-  
   pushMatrix();
-  translate(50,0);
+  translate(50, 0);
   rotate(radians(rotAngle));
   fill(random(200), random(200), random(200), random(200));
-  ellipse(10,0,random(200), random(200));
+  line(10, 0, random(200), random(200));
+  //4th push
+  pushMatrix();
+  translate(50, 0);
+  rotate(radians(rotBack));
+  fill(0);
+  rect(100, 100, 5, 5);
+  //5th
+  pushMatrix();
+  translate(300, 50);
+  rotate(radians(rotAngle));
+  ellipse(0, 0, 20, 20);
+
+  popMatrix();//first pop
+  translate(50, 0);
+  rotate(radians(rotAngle));
+  fill(random(100), random(100), random(100), random(200));
+  ellipse(10, 0, random(200), random(200));
+  rotate(radians(rotAngle));
+  triangle(30, 0, 0, 0, w/2, h/2);
+  triangle(200, 0, 0, 0, w/2, h/2);
+
+  popMatrix();//2nd pop
+  translate(50, 0);
+  rotate(radians(rotAngle));
+  triangle(150, 0, 0, 0, w/2, h/2);
+  triangle(200, 0, 0, 0, w/2, h/2);
+  fill(0);
+  stroke(9);
+  line(10, 0, random(200), random(200));
+  line(90, 0, random(200), random(200));
+  popMatrix();//3rd pop
+  translate(200, 0);
+  rotate(radians(rotAngle));
+  triangle(150, 0, 0, 0, w/2, h/2);
+  triangle(300, 0, 0, 0, w/2, h/2);
+  fill(0);
+  stroke(9);
+  line(10, 0, random(200), random(200));
+  line(90, 0, random(200), random(200));
   popMatrix();
-  popMatrix();
+  noStroke();
   popMatrix();
 
+}
+
+void OutTime() {
+
+  pushMatrix();
+  translate(width/2, height/2);
+  stroke(10);
+  fill(255);
+  ellipse(clockX, clockY, clockSizeX, clockSizeY);
   
-  
+
+
+  popMatrix();
+  translate(300, 250);
+  rotate(radians(spinTime));
+  fill(0);
+  ellipse(180, 180, 2, 2);
+  ellipse(160, 160, 5, 5);
+  ellipse(140, 140, 10, 10);
+  ellipse(120, 120, 15, 15);
+  ellipse(100, 100, 20, 20);
+  ellipse(80, 80, 20, 20);
+  ellipse(60, 60, 20, 20);
+  ellipse(40, 40, 20, 20);
+  line(40, 40, 20, 20);
+    text("What has hands", 140,100);
+    text("But no arms",140,120);
+    text("and a face but no eyes?",140,140);
+
+  spinTime++;
 }
 
 
-void keyPressed(){
-  
-  if(key==' ')
-  scene++;
-  
-  
+void keyPressed() {
+
+  if (key==' ')
+    scene++;
+
+  background(0);
 }
