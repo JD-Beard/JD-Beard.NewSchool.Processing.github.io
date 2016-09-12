@@ -6,7 +6,9 @@ float rotBack = 20;
 float spinTime = -90;
 float w, h;
 int scene;
-float clockX,clockY,clockSizeX,clockSizeY;
+float clockX, clockY, clockSizeX, clockSizeY;
+int changeColor;
+int Color;
 
 
 
@@ -22,7 +24,6 @@ void setup() {
   clockY = -20;
   clockSizeX = 400;
   clockSizeY = 400;
- 
 }
 
 void draw() {
@@ -40,14 +41,19 @@ void draw() {
 
   case 1:
 
-    background(255);
-    InTime();
+    ChangeWithRainbow();
     break;
 
   case 2:
     background(255);
-    OutTime();
+    InTime();
 
+    break;
+
+
+  case 3:
+    background(255);
+    OutTime();
     break;
   }
 }
@@ -129,16 +135,16 @@ void InTime() {
   translate(width/2, height/2);
   rotate(radians(rotAngle));
   rectMode(CENTER);
-  text("Press space for next scene", 70,40);
+  text("Press space for next scene", 70, 40);
   fill(0);
   rect(0, 0, w, h);
   rect(50, 50, 10, 10);
-   rect(150, 150, 10, 10);
-   rect(-50, -50, 10, 10);
-   rect(-150, -150, 10, 10);
+  rect(150, 150, 10, 10);
+  rect(-50, -50, 10, 10);
+  rect(-150, -150, 10, 10);
   rotAngle++;
-  
- //2nd push
+
+  //2nd push
   pushMatrix();
   translate(100, 0);
   rotate(radians(rotAngle));
@@ -191,7 +197,6 @@ void InTime() {
   popMatrix();
   noStroke();
   popMatrix();
-
 }
 
 void OutTime() {
@@ -201,7 +206,7 @@ void OutTime() {
   stroke(10);
   fill(255);
   ellipse(clockX, clockY, clockSizeX, clockSizeY);
-  
+
 
 
   popMatrix();
@@ -217,10 +222,21 @@ void OutTime() {
   ellipse(60, 60, 20, 20);
   ellipse(40, 40, 20, 20);
   line(40, 40, 20, 20);
-    text("What has hands", 140,100);
-    text("But no arms",140,120);
-    text("and a face but no eyes?",140,140);
+  text("What has hands", 140, 100);
+  text("But no arms", 140, 120);
+  text("and a face but no eyes?", 140, 140);
 
+  spinTime++;
+}
+
+void ChangeWithRainbow() {
+  text("Press Space For Next Scene",175,100);
+  stroke(abs(mouseX - pmouseX));
+  strokeWeight(1);
+  rect(mouseX, mouseY, pmouseX, pmouseY);
+  fill(mouseX, mouseY, Color, 50);
+  strokeWeight(abs(mouseX - pmouseX));
+  rotate(radians(spinTime));
   spinTime++;
 }
 
@@ -229,6 +245,13 @@ void keyPressed() {
 
   if (key==' ')
     scene++;
-
   background(0);
+}
+
+
+void mousePressed() {
+
+
+  changeColor = int(random(0, 255));
+  Color = changeColor;
 }
