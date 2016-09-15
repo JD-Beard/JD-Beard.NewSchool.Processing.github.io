@@ -1,0 +1,78 @@
+
+//Had alittle fun with thinking about it lol.
+
+Fields:
+
+float MegamanX = 0;
+float MegamanY = 0;
+int MegamanRunSpeed = 5;
+int MegamanGun = 0;
+boolean isJumping = false;
+boolean isDead = false;
+boolean isFiring = false;
+boolean isGrounded = false;
+boolean IsRunning = false;
+
+
+
+
+Methods:
+
+Jump(){
+
+     if(isJumping == true){
+        
+         rect(MegamanX,  MegamanY, 50,50);  // his body 
+         MegamanY = 10; 
+
+      }
+          else if(isJumping == false){
+           rect(MegamanX,  MegamanY, 50,50);  // his body 
+           MegamanY = 0;
+      }
+
+
+
+}
+
+Shooting(){
+
+if(isFiring == true){
+   rect(MegamanX,  MegamanY, 50,50); // his body 
+   ellipse(MegamanX,MegamanY,0,0); // bullets
+    MegamanGun++;
+}
+
+
+}
+
+Running(){
+
+if(isRunning == true){
+    rect(MegamanX,  MegamanY, 50,50);// his body 
+    MegamanX + MegamanRunSpeed;
+    MegamanRunSpeed+= 1;
+}else if(isRunning == false){
+    rect(MegamanX,  MegamanY, 50,50);// his body 
+    MegamanX = 0;
+    MegamanRunSpeed = 5;
+}
+
+
+}
+
+
+PlayerdeadOrAlive(){
+
+
+      if(isDead == true){
+
+    print("Game Over Press X to Continue);
+
+
+
+}
+
+
+}
+
