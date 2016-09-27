@@ -13,6 +13,7 @@ float circleSize;
 int buttonX, buttonY, buttonSize;
 boolean buttonPressed = false;
 boolean buttonTwoPressed = false;
+boolean buttonThreePressed = false;
 
 
 void setup() {
@@ -25,11 +26,13 @@ void setup() {
   buttonY = height/2;
   buttonSize = 100;
   fill(255);
-  text("Button 1",80,380);
-  text("Button 2",480,380);
+  text("Button 1 Start Pattern",50,380);
+  text("Button 2 Start 2nd Pattern",430,380);
+  text("Button 3 Change Size",250,570);
   fill(#FFCA58);
   ellipse(buttonX-200,buttonY,buttonSize,buttonSize);
   ellipse(buttonX+200,buttonY,buttonSize,buttonSize);
+  ellipse(buttonX+10,buttonY+200,buttonSize,buttonSize);
 
  
 
@@ -69,7 +72,14 @@ if (x > width) { // make it repeat.
   
   
   
+   if(buttonThreePressed){
   
+ 
+    SqSize += 1;
+
+
+   }
+
   
   
 
@@ -102,6 +112,7 @@ void SideSq(){
 void mousePressed(){
  float distance = dist(mouseX, mouseY, buttonX-200, buttonY);// first button
  float twoButton = dist(mouseX, mouseY, buttonX+200, buttonY); // 2nd button
+ float threeButton = dist(mouseX, mouseY, buttonX+10, buttonY+200); // 2nd button
 
   if (distance < buttonSize/2) {
     buttonPressed = !buttonPressed; // checking to see if the button is Pressed.
@@ -110,6 +121,11 @@ void mousePressed(){
   if(twoButton < buttonSize/2){
     
     buttonTwoPressed = !buttonTwoPressed; // checking to see if the button is Pressed.
+  }
+  
+   if(threeButton < buttonSize/2){
+    
+    buttonThreePressed = !buttonThreePressed; // checking to see if the button is Pressed.
   }
   
   
