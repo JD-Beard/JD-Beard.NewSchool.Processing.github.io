@@ -72,7 +72,7 @@ for (int i = 0; i < bigIntArray.length; i++) {
 // How big would this array be? 
 //int[] otherArray = new int[intArray[1]];
 
-//ANSWER: -999
+//ANSWER: 77
 
 // What about this?? All you have to do is resolve the value inside the bracket. 
 // Start on the inside.
