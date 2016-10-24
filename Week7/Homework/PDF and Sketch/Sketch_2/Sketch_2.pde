@@ -1,0 +1,56 @@
+import processing.pdf.*;
+//https://www.processing.org/reference/libraries/pdf/index.html
+
+PImage img;
+
+void setup() {
+  size(1200, 800,PDF, "export.pdf");
+  img = loadImage("port2.jpg");
+ 
+  rectMode(CENTER);
+  //noSmooth();
+ // stroke(255);
+  //noFill();
+ // noLoop();
+}
+
+void draw() {
+  background(255);  
+  int widthStep = 15;
+  int heightStep = 15;
+  
+  for (int i = 0; i < width; i += heightStep) {
+   beginShape();
+    for (int j = 0; j < height; j += widthStep) {
+      
+      color c = img.get(i, j);
+      fill(c);
+        pushMatrix();
+      translate(i, j);
+      //float d = dist(mouseX, mouseY, i, j);
+      
+      rotate(radians(i+j));
+  
+      
+      //ellipse(0,0,20,20);
+      rect(0, 0, 60, 10);
+      popMatrix();
+      //color c = img.get(int(j + (sin(radians(frameCount+i+j))*5)), i);
+      //color c = img.get(int(j + (sin(radians(frameCount+i+j))*10)), i);
+      
+      //float r = red(c);
+      //float g = green(c);
+      //float b = blue(c);
+
+      //float brightness = (r+g+b)/3;
+
+     //loat offset = map(brightness, 0, 255, 15, 0);
+
+     // stroke(map(brightness,0,255,150,255));
+      
+     // curveVertex(j, i+offset);
+    }
+    endShape();
+  }
+  exit();
+}
